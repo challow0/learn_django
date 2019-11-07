@@ -2,7 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Product(models.Model):
-	title 		= models.CharField(max_length=120)
-	description = models.TextField()
-	price 		= models.TextField()
-	summary		= models.TextField(default='this is cool')
+	title 		= models.CharField(max_length=120) # max_length = required
+	description = models.TextField(blank=True,null=True)
+	price 		= models.DecimalField(max_digits = 19,decimal_places=2) # search the document
+	summary		= models.TextField(blank=False, null=False)
+	featured	= models.BooleanField() # null=True, default=True
