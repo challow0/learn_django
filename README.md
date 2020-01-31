@@ -1,2 +1,3 @@
-# learn_django
-Learning django~~
+# learn_python
+
+Containing a list of learning notes~
