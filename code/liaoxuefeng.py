@@ -376,22 +376,174 @@ Python解释器自己会把实例变量传进去：
 
 # 使用__slots__
 
+# class Student(object):
+#     def set_age(self,age):
+#         self.age = age
+
+# s = Student()
+# s.name = 'Challow'
+# print(s.name)
+
+# from types import MethodType
+# s.set_age = MethodType(set_age, s)
+# s.set_age(5)
+# print(s.age)
+
+'''
+   使用property
+
+'''
+
+# class Student(object):
+   
+#    def get_score(self):
+#       return self._score
+
+#    def set_score(self, value):
+#       if not isinstance(value, int):
+#          raise ValueError('score must be an integer!')
+#       if value < 0 or value > 100:
+#          raise ValueError('score must between 0~100!')
+#       self._score = value
+# s = Student()
+# s.set_score(60)
+# print(s.get_score())
+
+# # 使用property 
+# class Student(object):
+   
+#    @property
+#    def score(self):
+#       return self._score
+   
+#    @score.setter
+#    def score(self, value):
+#       if not isinstance(value, int):
+#          raise ValueError('score must be an integer!')
+#       if value < 0 or value > 100:
+#          raise ValueError('score must between 0~100!')
+#       self._score = value
+
+# s = Student()
+# s.score = 60
+# print(s.score)
+
+'''
+多重继承
+'''
+# class Animal(object):
+#    pass
+# class Mammal(Animal):
+#    pass
+# class Bird(Animal):
+#    pass
+# class Dog(Mammal):
+#    pass
+# class Bat(Mammal):
+#    pass
+# class Parrot(Bird):
+#    pass
+# class Ostrich(Bird):
+#    pass
+
+# class Runnable(object):
+#    def run(self):
+#       print('Running...')
+# class Flyable(object):
+#    def fly(self):
+#       print('Flying...')
+
+# # 需要会跑的就多继承一个Runnable
+# class Dog(Mammal, Runnable):
+#    pass
+# # 需要会飞的就多继承一个Flyable
+# class Bat(Mammal, Flyable):
+#    pass
+
+'''
+定制类
+'''
+# # __str__ && __repr__
+# class Student(object):
+#    def __init__(self, name):
+#       self.name = name
+#    def __str__(self):
+#       return 'Student object (name: %s)' % self.name
+#    __repr__ = __str__
+# print(Student('Michael'))
+# s = Student('Micheal')
+# print(s)
+
+# # __iter__
+# class Fib(object):
+#    def __init__(self):
+#       self.a, self.b = 0, 1
+#    def __iter__(self):
+#       return self
+#    def __next__(self):
+#       self.a, self.b = self.b, self.a + self.b
+#       if self.a > 10000:
+#          raise StopIteration()
+#       return self.a
+# for n in Fib():
+#    print(n)
+
+# __getitem__
+# class Fib(object):
+#    def __getitem__(self, n):
+#       a, b = 1, 1
+#       for x in range(n):
+#          a, b = b, a+b
+#       return a
+
+# f = Fib()
+# print(f[100])
+
+# class Fib(object):
+#     def __getitem__(self, n):
+#         if isinstance(n, int): # n是索引
+#             a, b = 1, 1
+#             for x in range(n):
+#                 a, b = b, a + b
+#             return a
+#         if isinstance(n, slice): # n是切片
+#             start = n.start
+#             stop = n.stop
+#             if start is None:
+#                 start = 0
+#             a, b = 1, 1
+#             L = []
+#             for x in range(stop):
+#                 if x >= start:
+#                     L.append(a)
+#                 a, b = b, a + b
+#             return L
+
+# f = Fib()
+# print(f[:10])
+
+# # __getattr__
+# class Chain(object):
+#    def __init__(self, path=''):
+#       self._path = path
+#    def __getattr__(self, path):
+#       return Chain('%s/%s' % (self._path, path))
+#    def __str__(self):
+#       return self._path
+
+#    __repr__ = __str__
+# print(Chain().status.user.timeline.list)
+
+# __call__
 class Student(object):
-    def set_age(self,age):
-        self.age = age
+   def __init__(self, name):
+      self.name = name
 
-s = Student()
-s.name = 'Challow'
-print(s.name)
+   def __call__(self):
+      print('My name is %s.' % self.name)
 
-from types import MethodType
-s.set_age = MethodType(set_age, s)
-s.set_age(5)
-s.age
-
-
-
-
+s = Student('Micheal')
+s()
 
 
 
