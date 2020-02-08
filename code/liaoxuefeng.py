@@ -535,15 +535,54 @@ Python解释器自己会把实例变量传进去：
 # print(Chain().status.user.timeline.list)
 
 # __call__
-class Student(object):
-   def __init__(self, name):
-      self.name = name
+# class Student(object):
+#    def __init__(self, name):
+#       self.name = name
 
-   def __call__(self):
-      print('My name is %s.' % self.name)
+#    def __call__(self):
+#       print('My name is %s.' % self.name)
 
-s = Student('Micheal')
-s()
+# s = Student('Micheal')
+# s()
+
+'''
+   使用枚举类
+'''
+# from enum import Enum
+# Month = Enum('Month',('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+
+# for name, member in Month.__members__.items():
+#    print(name, '=>', member,',', member.value)
+
+# # @unique 可以帮助检查没有重复值
+# from enum import Enum, unique
+# @unique
+# class Weekday(Enum):
+#    Sun = 0
+#    Mon = 1
+#    Tue = 2
+#    Wed = 3
+#    Thu = 4
+#    Fri = 5
+#    Sat = 6
+   
+'''
+   使用元类
+'''
+class Hello(object):
+   def hello(self, name='world'):
+      print('Hello, %s.' % name)
+# from hello import Hello
+h = Hello()
+h.hello()
+print(type(Hello))
+print(type(h))
+
+
+
+
+
+
 
 
 
